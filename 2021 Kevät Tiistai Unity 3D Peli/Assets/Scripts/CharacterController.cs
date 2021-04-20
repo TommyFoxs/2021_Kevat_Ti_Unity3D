@@ -9,6 +9,16 @@ public class CharacterController : MonoBehaviour
     public float hyppyNopeus = 100f;
     public float painovoima = 10f;
 
+    private float vetikaalinenPyorinta = 0;
+    private float horisontaalinenPyorinta = 0;
+
+    private Vector3 liikesuunta = Vector3.zero;
+
+
+    //string sana = "moi";
+    //string on sana tai kirjaimia
+    //integer on numero mikä ei mene desimaaleihin
+    //float on numero mikä menee desimaaleihin
 
 
 
@@ -21,10 +31,12 @@ public class CharacterController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        horisontaalinenPyorinta += Input.GetAxis("Mouse X") * hiirenNopeus;
+        vetikaalinenPyorinta -= Input.GetAxis("Mouse Y") * hiirenNopeus;
+        Camera.main.transform.localRotation = Quaternion.Euler(vetikaalinenPyorinta, horisontaalinenPyorinta, 0);
     }
 
-    //Joka fysikka frame mun mielestä
+    //Runs with the physics motor same as Update.
     void FixedUpdate()
     {
 
